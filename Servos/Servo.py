@@ -67,7 +67,7 @@ class Servo:
 			raise Exception("New duty cycle value out of bounds")
 		else:
 			self.currentDuty = newDuty
-			PWM.setDutyCycle(self.pin, newDuty)
+			PWM.set_duty_cycle(self.pin, newDuty)
 
 
 
