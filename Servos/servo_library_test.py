@@ -10,32 +10,46 @@ increment = 0.1
 
 
 servo = Servo()
-servo.attach(servoPin, dutyCycle)
+servo.attach(servoPin)
 servo.setDutyCycle(dutyCycle)
 
 time.sleep(1)
 
 print servo.getPinStatus(), "\n"
 
-
-
-while dutyCycle < Servo.MAX_DUTY_CYCLE:
-	dutyCycle = dutyCycle + increment
-	servo.setDutyCycle(dutyCycle)
-
-	time.sleep(0.15)
-	print "DUTY CYCLE: ", servo.getDutyCycle()
-
-
 time.sleep(1)
 
 
-while dutyCycle > Servo.MIN_DUTY_CYCLE:
-	dutyCycle = dutyCycle - increment
-	servo.setDutyCycle(dutyCycle)
+
+finished = False
+
+while not finished:
+	if dutyCycle + increment <= Servo.MAX_DUTY_CYCLE:
+		dutyCycle = dutyCycle + increment
+		servo.setDutyCycle(dutyCycle)
+		print "DUTY CYCLE:", dutyCycle
+	else:
+		finished = True
+		print "Finished first sweep"
 
 	time.sleep(0.15)
-	print "DUTY CYCLE: ", servo.getDutyCycle()
+
+
+
+finished = False
+
+
+
+while not finished:
+	if dutyCycle - increment >= Servo.MIN_DUTY_CYCLE:
+		dutyCycle = dutyCycle - increment
+		servo.setDutyCycle(dutyCycle)
+		print "DUTY CYCLE:", dutyCycle
+	else:
+		finished = True
+		print "Finished second sweep"
+
+	time.sleep(0.15)
 
 
 
